@@ -19,19 +19,20 @@ const db = knex({
 
 const app = express();
 
-const whitelist = ['http://localhost:3001']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// const whitelist = ['http://localhost:3001',  'http://ec2-3-135-61-212.us-east-2.compute.amazonaws.com']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
 app.use(morgan('combined'));
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/signin', signin.signinAuthentication(db, bcrypt))
